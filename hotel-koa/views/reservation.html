@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/font_3118/iconfont.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .navigationBarUl {
+            display: flex;
+            align-items: center;
+            align-content: center;
+            width: 800px;
+            margin: auto;
+            height: 65px;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            justify-content: center
+        }
+
+        .navigationBarUl li {
+            width: 160px;
+            /* max-width: 160px; */
+            /* min-width: 160px; */
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .addRoomBtn {
+            border: solid 1px rgba(245, 196, 140, 0.295);
+            border-radius: 5px;
+            /* background-color: antiquewhite; */
+            width: 80px;
+            height: 25px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="navigationBarUl">
+        <% for(let i=0 ;i < navigationBarList.length;i++){ %>
+            <li>
+                <a href=<%=navigationBarAList[i] %>>
+                    <%= navigationBarList[i]%>
+                </a>
+
+            </li>
+            <% } %>
+    </ul>
+    <div class="PublicHead ">
+        <div class="leftBox ">
+
+            <div class="companyText">
+
+                <span class="span1">订单管理 </span> <span class="span2">后台订单列表</span>
+
+            </div>
+        </div>
+        <div class="RightBox ">
+            <div class="UserPhotoBox">
+                管理员
+            </div>
+            <a href="index.html">
+                <div class="dropOutBox">
+                    <i class="iconfont icon-app_icons--">
+                    </i>
+                    <span>退出</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="">
+
+        <!-- main -->
+        <div class="mainBox">
+            <div class="ContentBox">
+                <!--查询-->
+                <form action="/views/reservation" target="_parent" method="GET">
+                    <div class="InquireBox ">
+                        <div class="InquireleftBox">
+                            <div class="Text">订单号：</div>
+                            <div class="InputDiv">
+                                <input class="phoneInput" name="queryData" placeholder="请输入你需要查询的订单号" />
+                            </div>
+                        </div>
+                        <div class="BtnIcon Color1Btn fr">
+                            <input class="addRoomBtn" onclick="querydataform(event)" type="submit" value="查询">
+                            <input type="submit" formaction="/views/reservation"  value="取消">
+                        </div>
+                    </div>
+                </form>
+                <!--修改-->
+                <div class="InquireTableBox">
+                    <div class="headbox">
+                        <div class="headboxtext">
+                            <span class="span1">后台订单列表</span>
+                        </div>
+                        <!--批量删除-->
+                        <div class="BtnIcon Color5Btn">
+                            <input type="button" class="addRoomBtn" name="alls" id="all" onclick="allCheck()"
+                                value="全选">
+                            <input type="button" class="addRoomBtn" name="noAll" id="noAll" value="全不选"
+                                onclick="noAllCheck()">
+                            <form action="/closeOrdForm" method="POST" name="closeordForm" style="display: none;"></form>
+                            <input type="button" class="addRoomBtn" onclick="closeAllOrdFrom()" value="批量删除" name=""
+                                id="">
+                        </div>
+                    </div>
+
+                    <!--查询到的列表-->
+                    <!-- 点击查询按钮返回的列表 -->
+<!-- <div>
+                    <iframe seamless width="100%" height="100%" scrolling="auto" class="iframe_data" frameborder="0"
+                        name="querydata_form" >
+
+                    </iframe>
+</div> -->
+                    <!-- 默认列表 -->
+                    <div class="InquireSelectTable" >
+                        <table class="TableCss">
+                            <thead>
+                                <tr>
+                                    <td style="width: 50px;">
+
+                                    </td>
+                                    <td>ID</td>
+                                    <td>订单号</td>
+                                    <td>用户名</td>
+                                    <td>手机号</td>
+                                    <td>价格</td>
+                                    <td>床位</td>
+                                    <td>创建时间</td>
+                                    <td>入住时间</td>
+                                    <td>退房时间</td>
+                                    <td>是否有早餐</td>
+                                    <td>是否有窗</td>
+                                    <td>预定人数</td>
+                                    <td>房间数量</td>
+                                    <td>身份证号</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0 ;i < dataQuery.length;i++){ %>
+
+                                    <tr style="height: 150px;">
+                                        <td>
+                                            <input style="margin-top: 0px;" type="checkbox" class="selectAllCheck"
+                                                name="selectAllChecks" id="" value=<%=dataQuery[i].id %>>
+                                        </td>
+                                        <td>
+                                            <span class="rooms roomName" style=" width: 120px;justify-content: center;">
+                                                <%=dataQuery[i].id %>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="rooms roomSpan" style="width: 150px;">
+                                                <%=dataQuery[i].ordformid %>
+                                            </span> <!-- 订单号 -->
+                                        </td>
+                                        <td>
+                                            <span class="rooms roomSpan" style="width: 150px;">
+                                                <%=dataQuery[i].userid %>
+                                            </span> <!-- 用户名 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;">
+                                                手机号:
+                                                <br>
+                                                <%=dataQuery[i].phone %>
+                                            </span><!-- 手机号 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;">
+                                                价格:
+                                                <br>
+                                                <%=dataQuery[i].price %>
+                                            </span><!-- 价格 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                床位:
+                                                <br>
+                                                <%= dataQuery[i].roombeds %>
+                                            </span><!-- 床位 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                创建时间:
+                                                <br>
+                                                <%= dataQuery[i].createdate %>
+                                            </span><!-- 创建时间 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                入住时间:
+                                                <br>
+                                                <%= dataQuery[i].checkIntime %>
+                                            </span><!-- 入住时间 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                退房时间:
+                                                <br>
+                                                <%= dataQuery[i].checkouttime %>
+                                            </span><!-- 退房时间 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                是否有早餐:
+                                                <br>
+                                                <%= dataQuery[i].breakfast %>
+                                            </span><!-- 是否有早餐 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                是否有窗:
+                                                <br>
+                                                <%= dataQuery[i].windowed %>
+                                            </span><!-- 是否有窗 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                预定人数:
+                                                <br>
+                                                <%= dataQuery[i].reservationNum %>
+                                            </span><!-- 预定人数 -->
+                                        </td>
+                                        <td><span class="rooms" style="width: 150px;justify-content: center;"
+                                                id="times">
+                                                房间数量:
+                                                <br>
+                                                <%= dataQuery[i].nums %>
+                                            </span><!-- 房间数量 -->
+                                        </td>
+                                        <td><span class="roomSpan" style="width: 200px;">身份证号:
+                                                <br>
+                                                <%=dataQuery[i].idNumber %>
+                                            </span> <!-- 身份证号 -->
+                                        </td>
+
+                                        <td>
+                                            <div class="TableBtn" style="width: 100px;">
+                                                <input class="addRoomBtn" type="button" onclick="closeOrdFrom()"
+                                                    value="删除" name="" id="">
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <% } %>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!--分页-->
+                    <div class="PageNumber">
+                        <div class="NumbersBox">
+                            <div class="LeftArrow">
+                                上一页
+                            </div>
+                            <ul style="display: flex;
+                            width: 100px;
+                            justify-content: space-around;">
+                                <li class="Select">1</li>
+                                <li class="">2</li>
+                                <li class="">...</li>
+                                <li class="">4</li>
+                                <li class="">5</li>
+                            </ul>
+                            <div class="RightArrow ">
+                                下一页
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- alert通用 提示是否删除-->
+    <div class="floatBox">
+        <div class="f_Box">
+            <div class="f_Head">
+                <span style="
+                padding: 0px 20px;
+            ">提示消息</span>
+                <i class="iconfont icon-cuowu" style="
+                padding: 0px 20px;
+            " onclick="closeMess()"></i>
+            </div>
+            <div class="f_content ">
+                <!--提示消息内容-->
+                <div class="f_someText">
+                    <i class="iconfont icon-tongzhi"></i>
+                    <span>确定删除此信息？</span>
+                </div>
+                <!--按钮-->
+                <div class="f_pormatBtn  ">
+                    <div class="f_pormatBtn1">
+                        <input type="button" onclick="checkMess()" value="确定" name="" id="">
+                    </div>
+                    <div class="f_pormatBtn2">
+                        <input type="button" value="取消" onclick="closeMess()" name="" id="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    let navigationBarUl = document.getElementsByClassName('navigationBarUl')[0]
+    navigationBarUl.children[1].style.backgroundColor = 'rgba(135, 207, 235, 0.521)'
+    //   navigationBarUl.children[2].style.display = "flex"
+    navigationBarUl.children[1].style.height = '100%'
+    navigationBarUl.children[1].style.alignItems = 'center'
+    //   navigationBarUl.children[2].style.justifyContent= " center"
+    //   navigationBarUl.children[2].style.width= "100px"
+    let allChecks = document.getElementsByName("selectAllChecks");
+    let closeMes = document.getElementsByClassName('floatBox')
+    let closeordForm = document.getElementsByName('closeordForm')[0]
+    // let iframe_data = document.getElementsByClassName('iframe_data')[0]
+    // iframe_data.style.display = 'none'
+    function allCheck(params) {
+        for (let i = 0; i < allChecks.length; i++) {
+            console.log(allChecks[i].value)
+            allChecks[i].checked = true
+        }
+    }
+    function noAllCheck(params) {
+        for (let i = 0; i < allChecks.length; i++) {
+            allChecks[i].checked = false
+        }
+    }
+    // 关闭信息提示
+    function closeMess(params) {
+        console.log(closeMes)
+        closeMes[0].style.display = "none"
+    }
+    // 点击全部删除 弹出信息
+    function closeAllOrdFrom(params) {
+        closeMes[0].style.display = "flex"
+    }
+    // 确认删除 关闭信息弹出
+    function checkMess(params) {
+        closeMes[0].style.display = "none"
+        let idList = []
+        for (let i = 0; i < allChecks.length; i++) {
+            if (allChecks[i].checked == true) {
+                idList.push(allChecks[i].value)
+            }
+            
+        }
+        let input = document.createElement('input')
+        input.type = 'submit'
+        input.name = 'idList'
+        input.value = idList
+        closeordForm.appendChild(input)
+        input.click()
+        closeordForm.removeChild(input)
+    }
+
+    function closeOrdFrom(params) {
+        closeMes[0].style.display = "flex"
+    }
+    function querydataform(params) {
+        let queryData = document.getElementsByName('queryData')[0]
+        if (queryData.value == '') {
+            params.preventDefault()
+        }
+        console.log(queryData, queryData.value)
+    }
+</script>
+
+</html>

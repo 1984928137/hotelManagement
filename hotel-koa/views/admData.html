@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="/font_3118/iconfont.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    .navigationBarUl {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      width: 800px;
+      margin: auto;
+      height: 65px;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: center
+    }
+
+    .navigationBarUl li {
+      width: 160px;
+      /* max-width: 160px; */
+      /* min-width: 160px; */
+      display: flex;
+      justify-content: center;
+    }
+
+    .addRoomBtn {
+      border: solid 1px rgba(245, 196, 140, 0.295);
+      border-radius: 5px;
+      /* background-color: antiquewhite; */
+      width: 80px;
+      height: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul class="navigationBarUl">
+    <% for(let i=0 ;i < navigationBarList.length;i++){ %>
+      <li>
+        <a href=<%=navigationBarAList[i] %>>
+          <%= navigationBarList[i]%>
+        </a>
+
+      </li>
+      <% } %>
+  </ul>
+
+
+
+  <div class="PublicHead ">
+    <div class="leftBox ">
+
+      <div class="companyText">
+
+        <span class="span1">系统用户管理 </span> <span class="span2">后台系统用户列表</span>
+
+      </div>
+    </div>
+    <div class="RightBox ">
+      <div class="UserPhotoBox">
+        管理员
+      </div>
+      <a href="index.html">
+        <div class="dropOutBox">
+          <i class="iconfont icon-app_icons--">
+          </i>
+          <span>退出</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="">
+
+    <!-- main -->
+    <div class="mainBox">
+      <div class="ContentBox">
+        <!--查询-->
+        <div class="InquireBox ">
+          <div class="InquireleftBox">
+            <div class="Text">所有系统用户列表：</div>
+          </div>
+          <div class="BtnIcon Color1Btn fr">
+            <input class="addRoomBtn" type="hidden" name="" value="" id="">
+          </div>
+        </div>
+        <!--修改-->
+        <div class="InquireTableBox">
+          <div class="headbox">
+            <div class="headboxtext">
+              <span class="span1">系统用户列表操作</span>
+            </div>
+            <!--批量删除-->
+            <div class="BtnIcon Color5Btn">
+              <!-- ’房间‘的 按钮界面 -->
+
+              <input type="button" name="alls" class="pasBtn" id="all" onclick="allCheck()" value="全选">
+              <input type="button" name="noAll" class="pasBtn" id="noAll" value="全不选" onclick="noAllCheck()">
+              <button type="button" class="pasBtn" onclick="clickBtn()">修改用户</button>
+              <button type="button" class="pasBtn" onclick="closeBtn()">删除用户</button>
+              <button type="button" class="pasBtn" onclick="addBtn()">添加用户</button>
+            </div>
+          </div>
+
+          <!--查询到的列表-->
+
+          <div class="InquireSelectTable">
+            <table class="TableCss" style="width: 100%;">
+              <thead style="display: flex;justify-content: center;">
+                <tr style="
+                  /* display: flex; */
+                  text-align: center;
+                  line-height: 40px;
+              ">
+                  <td style="width: 20px; min-width: 20px;"></td>
+                  <td style="width: 120px; min-width: 140px;">ID</td>
+
+                  <td style="width: 170px; min-width: 170px;">用户名</td>
+                  <td style="width: 170px; min-width: 170px;">密码</td>
+                  <td style="width: 170px; min-width: 170px;">手机号</td>
+                  <td style="width: 170px; min-width: 170px;">创建时间</td>
+                  <td style="width: 220px; min-width: 220px;">总时长</td>
+
+                  <td style="width: 100px; min-width: 100px;">操作</td>
+                </tr>
+              </thead>
+              <tbody>
+                <% for(let i=0 ;i < dataQuery.length;i++){ %>
+                  <tr class="roomBar" id="roomBar">
+                    <td style="width: 20px;">
+                      <input type="checkbox" class="selectAllCheck" name="selectAllChecks" id=""
+                        value=<%=dataQuery[i].id %>>
+                    </td>
+                    <td>
+                      <span class="rooms roomName" style=" width: 120px;justify-content: center;">
+                        ID:
+                        <br>
+                        <%=dataQuery[i].id %>
+                      </span>
+                    </td>
+
+                    <td>
+                      <span class="rooms roomSpan" style="width: 150px;">
+                        用户名:
+                        <br>
+                        <%=dataQuery[i].name %>
+                      </span> <!-- 用户名 -->
+                    </td>
+                    <td>
+                      <span class="rooms roomSpan" style="width: 150px;">
+                        密码:
+                        <br>
+                        <%=dataQuery[i].userPwd %>
+                      </span> <!-- 密码 -->
+                    </td>
+                    <td><span class="rooms" style="width: 150px;justify-content: center;">
+                        手机号:
+                        <br>
+                        <%=dataQuery[i].phone %>
+                      </span><!-- 手机号 -->
+                    </td>
+
+                    <td><span class="rooms" style="width: 150px;justify-content: center;" id="times">
+                        创建时间:
+                        <br>
+                        <%= dataQuery[i].createdate %>
+                      </span><!-- 创建时间 -->
+                    </td>
+                    <td><span class="roomSpan" style="width: 200px;">总时长:
+                        <br>
+                        <%=dataQuery[i].totalDuration %>
+                      </span> <!-- 身份证号 -->
+                    </td>
+
+                    <td>
+                      <div class="TableBtn" style="width: 100px;">
+                        <input class="addRoomBtn" type="button" onclick="closeOrdFrom()" value="删除" name="" id="">
+                      </div>
+                    </td>
+                  </tr>
+
+                  <% } %>
+              </tbody>
+            </table>
+
+          </div>
+          <!--分页-->
+          <div class="PageNumber">
+            <div class="NumbersBox">
+              <div class="LeftArrow">
+                上一页
+              </div>
+              <ul style="display: flex;
+                            width: 100px;
+                            justify-content: space-around;">
+                <li class="Select">1</li>
+                <li class="">2</li>
+                <li class="">...</li>
+                <li class="">4</li>
+                <li class="">5</li>
+              </ul>
+              <div class="RightArrow ">
+                下一页
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- alert通用 提示是否添加-->
+  <div class="floatAddBox">
+    <div class="f_Box">
+      <div class="f_Head">
+        <span style="
+                padding: 0px 20px;
+            ">提示消息</span>
+        <i class="iconfont icon-cuowu" style="
+                padding: 0px 20px;
+            " onclick="addMess()"></i>
+      </div>
+      <div class="f_content ">
+        <!--提示消息内容-->
+        <div class="f_someText">
+          <i class="iconfont icon-tongzhi"></i>
+          <span>确定添加此信息？</span>
+        </div>
+        <!--按钮-->
+        <div class="f_pormatBtn  ">
+          <div class="f_pormatBtn1">
+            <input type="button" class="pasBtn" onclick="checkMess()" value="确定" name="" id="">
+          </div>
+          <div class="f_pormatBtn2">
+            <input type="button" class="pasBtn" value="取消" onclick="addMess()" name="" id="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- alert通用 提示是否删除-->
+  <div class="floatBox">
+    <div class="f_Box">
+      <div class="f_Head">
+        <span style="
+                padding: 0px 20px;
+            ">提示消息</span>
+        <i class="iconfont icon-cuowu" style="
+                padding: 0px 20px;
+            " onclick="closeMess()"></i>
+      </div>
+      <div class="f_content ">
+        <!--提示消息内容-->
+        <div class="f_someText">
+          <i class="iconfont icon-tongzhi"></i>
+          <span>确定删除此信息？</span>
+        </div>
+        <!--按钮-->
+        <div class="f_pormatBtn  ">
+          <div class="f_pormatBtn1">
+            <input type="button" class="pasBtn" onclick="checkMess()" value="确定" name="" id="">
+          </div>
+          <div class="f_pormatBtn2">
+            <input type="button" class="pasBtn" value="取消" onclick="closeMess()" name="" id="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form action="/users/admUpData" method="POST">
+    <div class="updata">
+    </div>
+  </form>
+</body>
+<script>
+  let navigationBarUl = document.getElementsByClassName('navigationBarUl')[0]
+  navigationBarUl.children[3].style.backgroundColor = 'rgba(135, 207, 235, 0.521)'
+  //   navigationBarUl.children[4].style.display = "flex"
+  navigationBarUl.children[3].style.height = '100%'
+  navigationBarUl.children[3].style.alignItems = 'center'
+  //   navigationBarUl.children[4].style.justifyContent= " center"
+  //   navigationBarUl.children[4].style.width= "100px"
+  let allChecks = document.getElementsByName("selectAllChecks");
+  let userNameQuery = ''
+  let closeMes = document.getElementsByClassName('floatBox')
+  let addMes = document.getElementsByClassName('floatAddBox')
+  let updatas = document.getElementsByClassName('updata')
+  let from = document.getElementsByClassName('roomBar')
+  let indexs = 0
+
+  function allCheck(params) {
+
+    for (let i = 0; i < allChecks.length; i++) {
+      console.log(allChecks[i].value)
+      allChecks[i].checked = true
+    }
+  }
+  function noAllCheck(params) {
+
+    for (let i = 0; i < allChecks.length; i++) {
+      allChecks[i].checked = false
+    }
+  }
+  function checkMess(params) {
+    closeMes[0].style.display = "none"
+    let closeValue = []
+    for (let index = 0; index < from.length; index++) {
+      if (allChecks[index].checked == true) {
+        // const element = from[index];
+        closeValue.push(allChecks[index].value)
+      }
+    }
+    console.log(closeValue)
+
+    let forms = document.createElement('form')
+    forms.action = '/users/admCloseData'
+    forms.method = 'post'
+    let input = document.createElement('input')
+    input.value = closeValue
+    input.type = 'submit'
+    input.name = 'closeData'
+    forms.appendChild(input)
+    forms.style.display = 'none'
+    let body = document.getElementsByTagName("body")
+    body[0].appendChild(forms)
+    input.click()
+    body[0].removeChild(forms)
+    // input.setAttribute('onclick','preventDefault(event)')
+    // input.click()
+    // params.preventDefault()
+  }
+  // 删除用户
+  function closeBtn(params) {
+    closeMes[0].style.display = "flex"
+  }
+  // 添加用户
+  function addBtn(params) {
+    // addMes[0].style.display = "flex"
+    let addList = ['用户名:','密码:','手机号:']
+    let upDiv = document.createElement('div')
+    upDiv.className = "updataMain"
+    updatas[0].appendChild(upDiv)
+    // }
+    let updataMain = document.getElementsByClassName('updataMain')
+    let heads = document.createElement('div')
+    heads.setAttribute('class', 'f_Head')
+    updataMain[indexs].appendChild(heads)
+    for (let index = 0; index < addList.length; index++) {
+      let divs = document.createElement('div')
+      let brs = document.createElement('br')
+      let label = document.createElement('label')
+      let inputs = document.createElement('input')
+      // label.htmlFor = 'fs_t'
+      label.textContent = addList[index]
+      // inputs.id = 'fs_t'
+      inputs.className = 'inputHeight'
+      inputs.name = 'addData'
+      inputs.required = true
+      if (index == 0) {
+        inputs.type = 'text'
+        
+      }else if (index == 1) {
+        inputs.type = 'password'
+      }else{
+        inputs.type = 'text'
+      }
+      
+      divs.appendChild(label)
+      divs.appendChild(inputs)
+      updataMain[indexs].appendChild(divs)
+      updataMain[indexs].appendChild(brs)
+    }
+
+
+
+
+    updataMain[indexs].children[0].style.padding = 0
+    let div = document.createElement('div')
+    div.setAttribute("class", "updataMainFooter")
+    updataMain[indexs].appendChild(div)
+    updataMain[indexs].children[updataMain[indexs].children.length - 1].style.padding = 0
+
+
+
+
+    let inputs1 = document.createElement('input')
+    inputs1.value = "添加"
+    inputs1.type = 'submit'
+    // inputs1.name = 'closeData'
+    inputs1.className = 'addRoomBtn'
+    inputs1.formAction = '/users/addAdmData'
+    inputs1.style.borderColor = '#130e0ec9'
+    inputs1.style.margin = 0
+    let inputs2 = document.createElement('input')
+    inputs2.setAttribute('type', 'button')
+    inputs2.setAttribute('value', '取消')
+    inputs2.setAttribute('class', 'addRoomBtn')
+    inputs2.style.margin = 0
+    inputs2.style.borderColor = '#130e0ec9'
+    inputs2.setAttribute('onclick', 'closeUpdata()')
+    if (updatas[0].children.length > 0) {
+      updatas[0].children[0].lastChild.appendChild(inputs1)
+      updatas[0].children[updatas[0].children.length - 1].lastChild.appendChild(inputs2)
+      updatas[0].children[updatas[0].children.length - 1].style.borderRight = 'none'
+      updatas[0].style.display = 'flex'
+    }
+
+  }
+  function closeOrdFrom(params) {
+    closeMes[0].style.display = "flex"
+  }
+
+  function closeMess(params) {
+    console.log(closeMes)
+    closeMes[0].style.display = "none"
+  }
+  function addMess(params) {
+    console.log(addMes)
+    addMes[0].style.display = "none"
+  }
+
+  function clickBtn() {
+    for (let index = 0; index < from.length; index++) {
+
+      if (allChecks[index].checked == true) {
+        // console.log("allChecks",from[index].cells)
+
+        // if (index >= 1) {
+        let upDiv = document.createElement('div')
+        upDiv.setAttribute('class', "updataMain")
+        updatas[0].appendChild(upDiv)
+        // }
+        let updataMain = document.getElementsByClassName('updataMain')
+        let heads = document.createElement('div')
+        heads.setAttribute('class', 'f_Head')
+        updataMain[indexs].appendChild(heads)
+
+        for (let i = 0; i < from[index].children.length; i++) {
+          let element = from[index].children[i].innerText;
+          if (element !== "") {
+            let spanHead = element.slice(0, element.search(':') + 1)
+            let inputValue = element.slice(element.search(':') + 1)
+            let divs = document.createElement('div')
+            let spans = document.createTextNode(spanHead + ' ' + ' ')
+            let brs = document.createElement('br')
+            let inputs = document.createElement('input')
+            inputs.setAttribute('value', inputValue)
+            inputs.setAttribute('class', 'inputHeight')
+            inputs.name = 'updata' + indexs
+            if (spanHead == '创建时间:' || spanHead == 'ID:') {
+              inputs.readOnly = true
+            }
+            divs.appendChild(spans)
+            divs.appendChild(inputs)
+            updataMain[indexs].appendChild(divs)
+            updataMain[indexs].appendChild(brs)
+
+          }
+        }
+        // updatas[0].innerHTML = from[index].innerHTML
+        updataMain[indexs].children[0].style.padding = 0
+        let div = document.createElement('div')
+        div.setAttribute("class", "updataMainFooter")
+        updataMain[indexs].appendChild(div)
+        updataMain[indexs].children[updataMain[indexs].children.length - 1].style.padding = 0
+        indexs = indexs + 1
+
+      }
+    }
+    // let div = document.createElement('div')
+
+    let inputs1 = document.createElement('input')
+    inputs1.value = "修改"
+    inputs1.type = 'submit'
+    // inputs1.name = 'closeData'
+    inputs1.className = 'addRoomBtn'
+    inputs1.style.borderColor = '#130e0ec9'
+    let inputs2 = document.createElement('input')
+    inputs2.setAttribute('type', 'button')
+    inputs2.setAttribute('value', '取消')
+    inputs2.setAttribute('class', 'addRoomBtn')
+    inputs2.setAttribute('style', 'border-color: #130e0ec9')
+    inputs2.setAttribute('onclick', 'closeUpdata()')
+    // div.appendChild(inputs1)
+    // div.appendChild(inputs2)
+    if (updatas[0].children.length > 0) {
+      updatas[0].children[0].lastChild.appendChild(inputs1)
+      updatas[0].children[updatas[0].children.length - 1].lastChild.appendChild(inputs2)
+      updatas[0].children[updatas[0].children.length - 1].style.borderRight = 'none'
+      console.log(updatas[0])
+      updatas[0].style.display = 'flex'
+    }
+
+
+  }
+
+  function closeUpdata(params) {
+    updatas[0].style.display = 'none'
+    for (let index = 0; index < updatas[0].children.length; index++) {
+      updatas[0].removeChild(updatas[0].children[index])
+      index--
+    }
+    indexs = 0
+  }
+  function addClickBtn(params) {
+    addMes[0].style.display = "flex"
+  }
+
+</script>
+
+</html>

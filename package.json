@@ -1,0 +1,22 @@
+{
+  "name": "vue3-hotel-management",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "element-plus": "^1.3.0-beta.1",
+    "qs": "^6.10.3",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.12"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.9.3",
+    "unplugin-auto-import": "^0.5.5",
+    "unplugin-vue-components": "^0.17.11",
+    "vite": "^2.6.4"
+  }
+}

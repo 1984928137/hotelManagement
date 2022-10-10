@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+nav{
+    display: flex;
+}
+.navUl {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.navUl li a {
+    color: rgb(54, 54, 54);
+    font-weight: bold;
+}
+.oneMenu {
+    display: flex;
+    min-width: 100px;
+    max-width: 100px;
+    flex-wrap: wrap;
+    height: 30px;
+    align-content: center;
+    /* align-items: center; */
+    /* transition: all 1s linear; */
+}
+.oneMenu a {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+}
+.twoMenuUl {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    min-width: 100px;
+    max-width: 100px;
+    width: 100px;
+    z-index: 3;
+    margin-top: 25px;
+    /* top: 100px; */
+    /* bottom: 90px; */
+}
+.oneMenu:hover .twoMenuUl {
+    display: flex;
+    /* transform: scale(1.1); */
+    /* transition: all 1s linear; */
+    /* color: rgb(243, 240, 240); */
+}
+.navUl li a:hover {
+    color: rgb(57, 141, 252);
+}
+.twoMenuLi {
+    display: flex;
+    min-width: 100px;
+    /* height: 100px; */
+}
+
+
+.shelf-table {
+    border: 1px solid #e0deda;
+    border-radius: 4px;
+    margin: 20px 0;
+    background: #fff;
+    width: 700px;
+}
+.table-msg {
+    display: flex;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 20px 20px;
+    border-bottom: 1px solid #e0deda;
+}
+.shelf-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    color: #3e3d43;
+    display: flex;
+    margin: 0 12px 0 0;
+}
+.mr5 {
+    margin-right: 5px;
+}
+.ml5 {
+    margin-left: 5px;
+}
+.dark {
+    color: #3e3d43;
+}
+.shelf-filter {
+    display: flex;
+    margin: -9px 0 0 0;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+form {
+    display: block;
+    /* margin-top: 0em; */
+}
+.ui-table {
+    font-size: 14px;
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    color: #3e3d43;
+}
+/* select{
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+form{
+    -moz-appearance:none;
+    -webkit-appearance:none;
+} */
+
+/* option::-ms-expand {
+    display: none;
+}
+*/
+/*
+option {
+    -moz-appearance: none;
+     /* Firefox  */
+    /* -webkit-appearance: none; */
+    /* Safari 和 Chrome */
+    /* appearance: none; */
+/* } */
+/*
+option:hover {
+    color: rgb(224, 21, 21);
+    /* background-color: #a7e644; */
+/* } */ 

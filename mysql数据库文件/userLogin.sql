@@ -1,0 +1,3 @@
+INSERT INTO `userLogin` (`id`, `name`, `userPwd`, `phone`, `src`, `createdate`, `idNumber`, `sex`) VALUES (1, 'qqqq', '1234', '12815634597', '/images/avatar/332277.jpeg', '2022-03-02 17:58:34', '344366198507242783', 2);
+INSERT INTO `userLogin` (`id`, `name`, `userPwd`, `phone`, `src`, `createdate`, `idNumber`, `sex`) VALUES (2, '陈', '242', '17172617115', '/images/avatar/364253.jpeg', '2022-03-03 15:58:46', '214466199807242213', 2);
+INSERT INTO `userLogin` (`id`, `name`, `userPwd`, `phone`, `src`, `createdate`, `idNumber`, `sex`) VALUES (3, '陈chs', '123456', '13944112454', '/images/avatar/436234.jpeg', '2022-03-03 16:00:50', '331436198811023245', 2);
